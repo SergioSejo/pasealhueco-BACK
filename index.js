@@ -3,26 +3,26 @@ require('dotenv').config();
 const { dbConnection } = require('./database/config');
 const cors = require('cors');
 
-//Crear el servidor de express
+//create express service
 const app = express();
 
-//Base de datos
+//BBDD
 dbConnection();
 
 //CORS
 app.use(cors());
 
-//Directorio público
+//Public directory
 app.use( express.static('public'));
 
-//Parseo dle body
+//parse body
 app.use( express.json() );
 
-//Rutas
+//Rutes
 app.use('/api/auth', require('./routes/auth'));
 
 
-//escuchar peticiones
+//listen requests
 app.listen( process.env.PORT, () => {
     console.log(`Servidor corriendo en el puerto ${ process.env.PORT }`);
 })
