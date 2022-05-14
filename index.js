@@ -13,16 +13,15 @@ dbConnection();
 app.use(cors());
 
 //Public directory
-app.use( express.static('public'));
+app.use(express.static('public'));
 
 //parse body
-app.use( express.json() );
+app.use(express.json());
 
 //Rutes
 app.use('/api/auth', require('./routes/auth'));
 
-
 //listen requests
-app.listen( process.env.PORT, () => {
-    console.log(`Servidor corriendo en el puerto ${ process.env.PORT }`);
-})
+app.listen(process.env.PORT, () => {
+	console.log(`Servidor corriendo en el puerto ${process.env.PORT}`);
+});
