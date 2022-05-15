@@ -1,155 +1,45 @@
-const { response } = require('express');
 const bcrypt = require('bcryptjs');
 const User = require('../models/User');
 const { generateJWT } = require('../helpers/jwt');
+const { response } = require('../helpers/response');
+const { enumResponse } = require('../helpers/enumResponse');
 
-const createUser = async (req, res = response) => {
-	const { email, password } = req.body;
+const loginUser = async (req, res) => {
+	let body;
 	try {
-		let user = await User.findOne({ email });
-		if (user) {
-			return res.status(400).json({
-				ok: false,
-				msg: 'Ya existe un usuario con ese email'
-			});
-		}
-
-		user = new User(req.body);
-
-		const salt = bcrypt.genSaltSync();
-		user.password = bcrypt.hashSync(password, salt);
-		await user.save();
-
-		const token = await generateJWT(user.id, user.name);
-
-		res.status(201).json({
-			ok: true,
-			uid: user.id,
-			name: user.name,
-			token
-		});
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({
-			ok: false,
-			msg: 'hable con un administrador'
-		});
-	}
-};
-
-const updateUser = async (req, res = response) => {
-	const { name, email, password } = req.body;
-	try {
+		const { email, password } = req.body;
 		let user = await User.findOne({ email });
 		if (!user) {
-			return res.status(400).json({
-				ok: false,
-				msg: 'El usuario no existe con ese email'
-			});
-		}
-
-		user.name = name;
-		user.email = email;
-
-		const salt = bcrypt.genSaltSync();
-		user.password = bcrypt.hashSync(password, salt);
-		await user.save();
-
-		const token = await generateJWT(user.id, user.name);
-
-		res.status(201).json({
-			ok: true,
-			uid: user.id,
-			name: user.name,
-			token
-		});
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({
-			ok: false,
-			msg: 'hable con un administrador'
-		});
-	}
-};
-
-const deleteUser = async (req, res = response) => {
-	const { email } = req.body;
-	try {
-		let user = await User.findOne({ email });
-		if (!user) {
-			return res.status(400).json({
-				ok: false,
-				msg: 'El usuario no existe con ese email'
-			});
-		}
-
-		await user.delete();
-
-		res.status(201).json({
-			ok: true,
-			msg: 'deleteUser'
-		});
-	} catch (error) {
-		console.log(error);
-		res.status(500).json({
-			ok: false,
-			msg: 'hable con un administrador'
-		});
-	}
-};
-
-const loginUser = async (req, res = response) => {
-	const { email, password } = req.body;
-
-	try {
-		let user = await User.findOne({ email });
-		if (!user) {
-			return res.status(400).json({
-				ok: false,
-				msg: 'El usuario no existe con ese email'
-			});
+			body = { ok: false, msg: enumResponse.incorrectData };
+			return response(res, 400, body);
 		}
 
 		const validPassword = bcrypt.compareSync(password, user.password);
 		if (!validPassword) {
-			return res.status(400).json({
-				ok: false,
-				msg: 'El password es incorrecto'
-			});
+			body = { ok: false, msg: enumResponse.incorrectData };
+			return response(res, 400, body);
 		}
 
 		const token = await generateJWT(user.id, user.name);
 
-		res.status(201).json({
-			ok: true,
-			uid: user.id,
-			name: user.name,
-			token
-		});
+		body = { ok: true, uid: user.id, name: user.name, token };
+		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
-		res.status(500).json({
-			ok: false,
-			msg: 'hable con un administrador'
-		});
+		return response(res, 500);
 	}
 };
 
-const renewToken = async (req, res = response) => {
+const renewToken = async (req, res) => {
 	const { uid, name } = req;
 
 	const token = await generateJWT(uid, name);
 
-	res.json({
-		ok: true,
-		token
-	});
+	body = { ok: true, token };
+	return response(res, 200, body);
 };
 
 module.exports = {
-	createUser,
-	updateUser,
-	deleteUser,
 	loginUser,
 	renewToken
 };
