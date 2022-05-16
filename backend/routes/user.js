@@ -1,5 +1,5 @@
 /*
-    User rutes / User
+    User rutes / user
     host + /api/user
 */
 

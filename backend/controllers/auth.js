@@ -1,5 +1,5 @@
 const bcrypt = require('bcryptjs');
-const User = require('../models/User');
+const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
 const { enumResponse } = require('../helpers/enumResponse');
