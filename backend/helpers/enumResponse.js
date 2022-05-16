@@ -20,8 +20,14 @@ const enumTeam = {
 	teamEmpty: 'No hay equipos en la base de datos'
 };
 
+const enumToken = {
+	tokenEmpty: 'No hay token en la petición',
+	tokenInvalid: 'Token no válido'
+};
+
 module.exports = {
 	enumGeneral,
 	enumUser,
-	enumTeam
+	enumTeam,
+	enumToken
 };

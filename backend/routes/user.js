@@ -6,6 +6,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
+const { validateJWT } = require('../middlewares/validateJWT');
 const {
 	user_create,
 	user_update,
@@ -25,7 +26,8 @@ router.post(
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
 		check('email', 'El email es obligatorio').isEmail(),
 		check('password', 'El password debe ser de 6 caracteres').isLength({ min: 6 }),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	user_create
 );
@@ -35,7 +37,8 @@ router.post(
 	[
 		//middelwares
 		check('email', 'El email es obligatorio').isEmail(),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	user_update
 );
@@ -45,14 +48,15 @@ router.post(
 	[
 		//middelwares
 		check('email', 'El email es obligatorio').isEmail(),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	user_delete
 );
 
-router.get('/getAll', user_getAll);
-router.get('/getById', user_getById);
-router.get('/getByEmail', user_getByEmail);
-router.get('/getByTeam', user_getByTeam);
+router.get('/getAll', validateJWT, user_getAll);
+router.get('/getById', validateJWT, user_getById);
+router.get('/getByEmail', validateJWT, user_getByEmail);
+router.get('/getByTeam', validateJWT, user_getByTeam);
 
 module.exports = router;

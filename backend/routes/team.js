@@ -6,6 +6,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
+const { validateJWT } = require('../middlewares/validateJWT');
 const { team_create, team_update, team_delete, team_getAll, team_getById } = require('../controllers/team');
 
 const router = Router();
@@ -15,7 +16,8 @@ router.post(
 	[
 		//middelwares
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	team_create
 );
@@ -25,7 +27,8 @@ router.post(
 	[
 		//middelwares
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	team_update
 );
@@ -35,12 +38,13 @@ router.post(
 	[
 		//middelwares
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
-		validateFields
+		validateFields,
+		validateJWT
 	],
 	team_delete
 );
 
-router.get('/getAll', team_getAll);
-router.get('/getById', team_getById);
+router.get('/getAll', validateJWT, team_getAll);
+router.get('/getById', validateJWT, team_getById);
 
 module.exports = router;

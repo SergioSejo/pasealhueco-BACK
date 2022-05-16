@@ -39,7 +39,17 @@ const renewToken = async (req, res) => {
 	return response(res, 200, body);
 };
 
+const newToken = async (req, res) => {
+	const { uid, name } = req;
+
+	const token = await generateJWT(uid, name);
+
+	body = { ok: true, token };
+	return response(res, 200, body);
+};
+
 module.exports = {
 	loginUser,
-	renewToken
+	renewToken,
+	newToken
 };

@@ -7,6 +7,7 @@ const { enumGeneral, enumUser } = require('../helpers/enumResponse');
 const user_create = async (req, res) => {
 	let body;
 	try {
+		console.log('req.body: ', req.body);
 		const { email, password } = req.body;
 		let user = await User.findOne({ email });
 		if (user) {
