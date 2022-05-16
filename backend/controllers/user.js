@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
-const { enumResponse } = require('../helpers/enumResponse');
+const { enumGeneral, enumUser } = require('../helpers/enumResponse');
 
 const createUser = async (req, res) => {
 	let body;
@@ -10,7 +10,7 @@ const createUser = async (req, res) => {
 		const { email, password } = req.body;
 		let user = await User.findOne({ email });
 		if (user) {
-			body = { ok: false, msg: enumResponse.userExist };
+			body = { ok: false, msg: enumUser.userExist };
 			return response(res, 400, body);
 		}
 
@@ -36,7 +36,7 @@ const updateUser = async (req, res) => {
 		const { name, email, password, age, foot, team } = req.body;
 		let user = await User.findOne({ email });
 		if (!user) {
-			body = { ok: false, msg: enumResponse.incorrectData };
+			body = { ok: false, msg: enumGeneral.incorrectData };
 			return responseresponse(400, body, res);
 		}
 
@@ -68,13 +68,13 @@ const deleteUser = async (req, res) => {
 		const { email } = req.body;
 		let user = await User.findOne({ email });
 		if (!user) {
-			body = { ok: false, msg: enumResponse.incorrectData };
+			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 
 		await user.delete();
 
-		body = { ok: true, msg: enumResponse.deleteUser };
+		body = { ok: true, msg: enumUser.deleteUser };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -87,7 +87,7 @@ const getUsers = async (req, res) => {
 	try {
 		let users = await User.find();
 		if (!users) {
-			body = { ok: true, msg: enumResponse.emptyUsers };
+			body = { ok: true, msg: enumUser.emptyUsers };
 			return response(res, 200, body);
 		}
 
@@ -104,12 +104,12 @@ const getUserById = async (req, res) => {
 	try {
 		const { id } = req.body;
 		if (!id) {
-			body = { ok: false, msg: enumResponse.emptyData };
+			body = { ok: false, msg: enumGeneral.emptyData };
 			return response(res, 400, body);
 		}
 		let user = await User.findById(id);
 		if (!user) {
-			body = { ok: true, msg: enumResponse.userNoExist };
+			body = { ok: true, msg: enumUser.userNoExist };
 			return response(res, 200, body);
 		}
 
@@ -126,12 +126,12 @@ const getUserByEmail = async (req, res) => {
 	try {
 		const { email } = req.body;
 		if (!email) {
-			body = { ok: false, msg: enumResponse.emptyData };
+			body = { ok: false, msg: enumGeneral.emptyData };
 			return response(res, 400, body);
 		}
 		let user = await User.findOne({ email });
 		if (!user) {
-			body = { ok: true, msg: enumResponse.userNoExist };
+			body = { ok: true, msg: enumUser.userNoExist };
 			return response(res, 200, body);
 		}
 
@@ -148,12 +148,12 @@ const getUserByTeam = async (req, res) => {
 	try {
 		const { team } = req.body;
 		if (!team) {
-			body = { ok: false, msg: enumResponse.emptyData };
+			body = { ok: false, msg: enumGeneral.emptyData };
 			return response(res, 400, body);
 		}
 		let user = await User.find({ team });
 		if (!user) {
-			body = { ok: true, msg: enumResponse.userNoExist };
+			body = { ok: true, msg: enumUser.userNoExist };
 			return response(res, 200, body);
 		}
 
