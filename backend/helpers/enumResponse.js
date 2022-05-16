@@ -8,16 +8,20 @@ const enumUser = {
 	userExist: 'Ya existe un usuario con ese email',
 	userNoExist: 'Usuario no encontrado',
 	deleteUser: 'Usuario eliminado de la base de datos',
-	emptyUsers: 'No hay usuarios en la base de datos'
+	userEmpty: 'No hay usuarios en la base de datos'
 };
 
 const enumTeam = {
+	teamCreated: 'Equipo creado satisfactoriamente',
 	teamExist: 'Ya existe un equipo con ese nombre',
-	deleteUser: 'Equipo eliminado de la base de datos'
+	teamNoExist: 'Equipo no encontrado',
+	teamDeleted: 'Equipo eliminado de la base de datos',
+	teamUpdated: 'Equipo modificado correctamente',
+	teamEmpty: 'No hay equipos en la base de datos'
 };
 
 module.exports = {
-	enumResponse,
+	enumGeneral,
 	enumUser,
 	enumTeam
 };

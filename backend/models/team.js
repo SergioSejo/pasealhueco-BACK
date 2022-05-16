@@ -6,12 +6,12 @@ const teamSchema = Schema({
 		require: true,
 		unique: true
 	},
+	description: {
+		type: String
+	},
 	creationDate: {
 		type: String,
 		require: true
-	},
-	description: {
-		type: String
 	}
 });
 

@@ -1,10 +1,9 @@
 const bcrypt = require('bcryptjs');
 const Team = require('../models/team');
-const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
 const { enumGeneral, enumTeam } = require('../helpers/enumResponse');
 
-const createTeam = async (req, res) => {
+const team_create = async (req, res) => {
 	let body;
 	try {
 		const { name } = req.body;
@@ -14,15 +13,11 @@ const createTeam = async (req, res) => {
 			return response(res, 400, body);
 		}
 
-		user = new User(req.body);
+		team = new Team(req.body);
 
-		const salt = bcrypt.genSaltSync();
-		user.password = bcrypt.hashSync(password, salt);
-		await user.save();
+		const newTeam = await team.save();
 
-		const token = await generateJWT(user.id, user.name);
-
-		body = { ok: true, uid: user.id, name: user.name, token };
+		body = { ok: true, msg: enumTeam.teamCreated, newTeam };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -30,31 +25,21 @@ const createTeam = async (req, res) => {
 	}
 };
 
-const updateTeam = async (req, res) => {
+const team_update = async (req, res) => {
 	let body;
 	try {
-		const { name, email, password, age, foot, team } = req.body;
-		let user = await User.findOne({ email });
-		if (!user) {
+		const { id, name, description } = req.body;
+		let team = await Team.findById(id);
+		if (!team) {
 			body = { ok: false, msg: enumGeneral.incorrectData };
 			return responseresponse(400, body, res);
 		}
 
-		user.name = name ? name : user.name;
-		user.email = email ? email : user.email;
-		user.age = age ? age : user.age;
-		user.foot = foot ? foot : user.foot;
-		user.team = team ? team : user.team;
+		team.description = description ? description : team.description;
 
-		if (password) {
-			const salt = bcrypt.genSaltSync();
-			user.password = bcrypt.hashSync(password, salt);
-		}
+		const updatedTeam = await team.save();
 
-		await user.save();
-
-		const token = await generateJWT(user.id, user.name);
-		body = { ok: true, uid: user.id, name: user.name, token };
+		body = { ok: true, msg: enumTeam.teamUpdated, updatedTeam };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -62,19 +47,58 @@ const updateTeam = async (req, res) => {
 	}
 };
 
-const deleteTeam = async (req, res) => {
+const team_delete = async (req, res) => {
 	let body;
 	try {
-		const { email } = req.body;
-		let user = await User.findOne({ email });
-		if (!user) {
+		const { id } = req.body;
+		let team = await Team.findById(id);
+		if (!team) {
 			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 
-		await user.delete();
+		await team.delete();
 
-		body = { ok: true, msg: enumTeam.deleteTeam };
+		body = { ok: true, msg: enumTeam.teamDeleted, name: team.name };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
+const team_getAll = async (req, res) => {
+	let body;
+	try {
+		let teams = await Team.find();
+		if (!teams) {
+			body = { ok: true, msg: enumTeam.teamEmpty };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, teams };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
+const team_getById = async (req, res) => {
+	let body;
+	try {
+		const { id } = req.body;
+		if (!id) {
+			body = { ok: false, msg: enumGeneral.emptyData };
+			return response(res, 400, body);
+		}
+		let team = await Team.findById(id);
+		if (!team) {
+			body = { ok: true, msg: enumTeam.teamNoExist };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, team };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -83,7 +107,9 @@ const deleteTeam = async (req, res) => {
 };
 
 module.exports = {
-	createTeam,
-	updateTeam,
-	deleteTeam
+	team_create,
+	team_update,
+	team_delete,
+	team_getAll,
+	team_getById
 };

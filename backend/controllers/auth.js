@@ -2,7 +2,7 @@ const bcrypt = require('bcryptjs');
 const User = require('../models/user');
 const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
-const { enumResponse } = require('../helpers/enumResponse');
+const { enumGeneral } = require('../helpers/enumResponse');
 
 const loginUser = async (req, res) => {
 	let body;
@@ -10,13 +10,13 @@ const loginUser = async (req, res) => {
 		const { email, password } = req.body;
 		let user = await User.findOne({ email });
 		if (!user) {
-			body = { ok: false, msg: enumResponse.incorrectData };
+			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 
 		const validPassword = bcrypt.compareSync(password, user.password);
 		if (!validPassword) {
-			body = { ok: false, msg: enumResponse.incorrectData };
+			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 

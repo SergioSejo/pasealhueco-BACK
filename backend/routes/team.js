@@ -6,7 +6,7 @@
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
-const { createTeam, updateTeam, deleteTeam } = require('../controllers/team');
+const { team_create, team_update, team_delete, team_getAll, team_getById } = require('../controllers/team');
 
 const router = Router();
 
@@ -15,31 +15,32 @@ router.post(
 	[
 		//middelwares
 		check('name', 'El nombre es obligatorio').not().isEmpty(),
-		check('email', 'El email es obligatorio').isEmail(),
-		check('password', 'El password debe ser de 6 caracteres').isLength({ min: 6 }),
 		validateFields
 	],
-	createTeam
+	team_create
 );
 
 router.post(
 	'/update',
 	[
 		//middelwares
-		check('email', 'El email es obligatorio').isEmail(),
+		check('name', 'El nombre es obligatorio').not().isEmpty(),
 		validateFields
 	],
-	updateTeam
+	team_update
 );
 
 router.post(
 	'/delete',
 	[
 		//middelwares
-		check('email', 'El email es obligatorio').isEmail(),
+		check('name', 'El nombre es obligatorio').not().isEmpty(),
 		validateFields
 	],
-	deleteTeam
+	team_delete
 );
+
+router.get('/getAll', team_getAll);
+router.get('/getById', team_getById);
 
 module.exports = router;

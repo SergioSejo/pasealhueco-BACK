@@ -22,6 +22,9 @@ const userSchema = Schema({
 	},
 	team: {
 		type: String
+	},
+	creationDate: {
+		type: String
 	}
 });
 

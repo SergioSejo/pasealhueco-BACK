@@ -4,7 +4,7 @@ const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
 const { enumGeneral, enumUser } = require('../helpers/enumResponse');
 
-const createUser = async (req, res) => {
+const user_create = async (req, res) => {
 	let body;
 	try {
 		const { email, password } = req.body;
@@ -30,7 +30,7 @@ const createUser = async (req, res) => {
 	}
 };
 
-const updateUser = async (req, res) => {
+const user_update = async (req, res) => {
 	let body;
 	try {
 		const { name, email, password, age, foot, team } = req.body;
@@ -62,7 +62,7 @@ const updateUser = async (req, res) => {
 	}
 };
 
-const deleteUser = async (req, res) => {
+const user_delete = async (req, res) => {
 	let body;
 	try {
 		const { email } = req.body;
@@ -82,7 +82,7 @@ const deleteUser = async (req, res) => {
 	}
 };
 
-const getUsers = async (req, res) => {
+const user_getAll = async (req, res) => {
 	let body;
 	try {
 		let users = await User.find();
@@ -99,7 +99,7 @@ const getUsers = async (req, res) => {
 	}
 };
 
-const getUserById = async (req, res) => {
+const user_getById = async (req, res) => {
 	let body;
 	try {
 		const { id } = req.body;
@@ -121,7 +121,7 @@ const getUserById = async (req, res) => {
 	}
 };
 
-const getUserByEmail = async (req, res) => {
+const user_getByEmail = async (req, res) => {
 	let body;
 	try {
 		const { email } = req.body;
@@ -143,7 +143,7 @@ const getUserByEmail = async (req, res) => {
 	}
 };
 
-const getUserByTeam = async (req, res) => {
+const user_getByTeam = async (req, res) => {
 	let body;
 	try {
 		const { team } = req.body;
@@ -166,11 +166,11 @@ const getUserByTeam = async (req, res) => {
 };
 
 module.exports = {
-	createUser,
-	updateUser,
-	deleteUser,
-	getUsers,
-	getUserById,
-	getUserByEmail,
-	getUserByTeam
+	user_create,
+	user_update,
+	user_delete,
+	user_getAll,
+	user_getById,
+	user_getByEmail,
+	user_getByTeam
 };
