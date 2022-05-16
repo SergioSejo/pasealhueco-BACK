@@ -33,18 +33,24 @@ const createUser = async (req, res) => {
 const updateUser = async (req, res) => {
 	let body;
 	try {
-		const { name, email, password } = req.body;
+		const { name, email, password, age, foot, team } = req.body;
 		let user = await User.findOne({ email });
 		if (!user) {
 			body = { ok: false, msg: enumResponse.incorrectData };
 			return responseresponse(400, body, res);
 		}
 
-		user.name = name;
-		user.email = email;
+		user.name = name ? name : user.name;
+		user.email = email ? email : user.email;
+		user.age = age ? age : user.age;
+		user.foot = foot ? foot : user.foot;
+		user.team = team ? team : user.team;
 
-		const salt = bcrypt.genSaltSync();
-		user.password = bcrypt.hashSync(password, salt);
+		if (password) {
+			const salt = bcrypt.genSaltSync();
+			user.password = bcrypt.hashSync(password, salt);
+		}
+
 		await user.save();
 
 		const token = await generateJWT(user.id, user.name);
@@ -76,8 +82,95 @@ const deleteUser = async (req, res) => {
 	}
 };
 
+const getUsers = async (req, res) => {
+	let body;
+	try {
+		let users = await User.find();
+		if (!users) {
+			body = { ok: true, msg: enumResponse.emptyUsers };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, users };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
+const getUserById = async (req, res) => {
+	let body;
+	try {
+		const { id } = req.body;
+		if (!id) {
+			body = { ok: false, msg: enumResponse.emptyData };
+			return response(res, 400, body);
+		}
+		let user = await User.findById(id);
+		if (!user) {
+			body = { ok: true, msg: enumResponse.userNoExist };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, user };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
+const getUserByEmail = async (req, res) => {
+	let body;
+	try {
+		const { email } = req.body;
+		if (!email) {
+			body = { ok: false, msg: enumResponse.emptyData };
+			return response(res, 400, body);
+		}
+		let user = await User.findOne({ email });
+		if (!user) {
+			body = { ok: true, msg: enumResponse.userNoExist };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, user };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
+const getUserByTeam = async (req, res) => {
+	let body;
+	try {
+		const { team } = req.body;
+		if (!team) {
+			body = { ok: false, msg: enumResponse.emptyData };
+			return response(res, 400, body);
+		}
+		let user = await User.find({ team });
+		if (!user) {
+			body = { ok: true, msg: enumResponse.userNoExist };
+			return response(res, 200, body);
+		}
+
+		body = { ok: true, user };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
 module.exports = {
 	createUser,
 	updateUser,
-	deleteUser
+	deleteUser,
+	getUsers,
+	getUserById,
+	getUserByEmail,
+	getUserByTeam
 };
