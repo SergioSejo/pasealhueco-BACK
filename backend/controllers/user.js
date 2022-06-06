@@ -7,7 +7,6 @@ const { enumGeneral, enumUser } = require('../helpers/enumResponse');
 const user_create = async (req, res) => {
 	let body;
 	try {
-		console.log('req.body: ', req.body);
 		const { email, password } = req.body;
 		let user = await User.findOne({ email });
 		if (user) {
@@ -16,7 +15,7 @@ const user_create = async (req, res) => {
 		}
 
 		user = new User(req.body);
-
+		user.creationDate = new Date().getTime().toString();
 		const salt = bcrypt.genSaltSync();
 		user.password = bcrypt.hashSync(password, salt);
 		await user.save();

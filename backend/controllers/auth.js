@@ -35,7 +35,7 @@ const renewToken = async (req, res) => {
 
 	const token = await generateJWT(uid, name);
 
-	body = { ok: true, token };
+	body = { ok: true, token, uid, name };
 	return response(res, 200, body);
 };
 
@@ -44,7 +44,7 @@ const newToken = async (req, res) => {
 
 	const token = await generateJWT(uid, name);
 
-	body = { ok: true, token };
+	body = { ok: true, token, uid, name };
 	return response(res, 200, body);
 };
 
