@@ -4,11 +4,11 @@ const enumGeneral = {
 	emptyData: 'Los datos enviados son incorrectos o faltan'
 };
 
-const enumUser = {
-	userExist: 'Ya existe un usuario con ese email',
-	userNoExist: 'Usuario no encontrado',
-	deleteUser: 'Usuario eliminado de la base de datos',
-	userEmpty: 'No hay usuarios en la base de datos'
+const enumPlayer = {
+	playerExist: 'Ya existe un usuario con ese email',
+	playerNoExist: 'Usuario no encontrado',
+	deletePlayer: 'Usuario eliminado de la base de datos',
+	playerEmpty: 'No hay usuarios en la base de datos'
 };
 
 const enumTeam = {
@@ -20,6 +20,15 @@ const enumTeam = {
 	teamEmpty: 'No hay equipos en la base de datos'
 };
 
+const enumJornada = {
+	jornadaCreated: 'Jornada creada satisfactoriamente',
+	jornadaExist: 'Ya existe una jornada con ese nombre',
+	jornadaNoExist: 'Jornada no encontrada',
+	jornadaDeleted: 'Jornada eliminada de la base de datos',
+	jornadaUpdated: 'Jornada modificada correctamente',
+	jornadaEmpty: 'No hay jornadas en la base de datos'
+};
+
 const enumToken = {
 	tokenEmpty: 'No hay token en la petición',
 	tokenInvalid: 'Token no válido'
@@ -27,7 +36,8 @@ const enumToken = {
 
 module.exports = {
 	enumGeneral,
-	enumUser,
+	enumPlayer,
 	enumTeam,
-	enumToken
+	enumToken,
+	enumJornada
 };

@@ -1,4 +1,3 @@
-const bcrypt = require('bcryptjs');
 const Team = require('../models/team');
 const { response } = require('../helpers/response');
 const { enumGeneral, enumTeam } = require('../helpers/enumResponse');

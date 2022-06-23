@@ -1,6 +1,6 @@
 /*
-    User rutes / user
-    host + /api/user
+    Player rutes / player
+    host + /api/player
 */
 
 const { Router } = require('express');
@@ -8,14 +8,14 @@ const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
 const { validateJWT } = require('../middlewares/validateJWT');
 const {
-	user_create,
-	user_update,
-	user_delete,
-	user_getAll,
-	user_getById,
-	user_getByEmail,
-	user_getByTeam
-} = require('../controllers/user');
+	player_create,
+	player_update,
+	player_delete,
+	player_getAll,
+	player_getById,
+	player_getByEmail,
+	player_getByTeam
+} = require('../controllers/player');
 
 const router = Router();
 
@@ -28,7 +28,7 @@ router.post(
 		check('password', 'El password debe ser de 6 caracteres').isLength({ min: 6 }),
 		validateFields
 	],
-	user_create
+	player_create
 );
 
 router.post(
@@ -39,7 +39,7 @@ router.post(
 		validateFields,
 		validateJWT
 	],
-	user_update
+	player_update
 );
 
 router.post(
@@ -50,12 +50,12 @@ router.post(
 		validateFields,
 		validateJWT
 	],
-	user_delete
+	player_delete
 );
 
-router.get('/getAll', validateJWT, user_getAll);
-router.get('/getById', validateJWT, user_getById);
-router.get('/getByEmail', validateJWT, user_getByEmail);
-router.get('/getByTeam', validateJWT, user_getByTeam);
+router.get('/getAll', validateJWT, player_getAll);
+router.get('/getById', validateJWT, player_getById);
+router.get('/getByEmail', validateJWT, player_getByEmail);
+router.get('/getByTeam', validateJWT, player_getByTeam);
 
 module.exports = router;

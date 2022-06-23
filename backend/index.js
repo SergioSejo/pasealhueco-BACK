@@ -21,8 +21,9 @@ app.use(express.json());
 
 //Rutes
 app.use('/api/auth', require('./routes/auth'));
-app.use('/api/user', require('./routes/user'));
+app.use('/api/player', require('./routes/player'));
 app.use('/api/team', require('./routes/team'));
+app.use('/api/jornada', require('./routes/jornada'));
 
 //listen requests
 app.listen(process.env.PORT, () => {

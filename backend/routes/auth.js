@@ -1,12 +1,12 @@
 /*
-    User rutes / Auth
+    Auth rutes / Auth
     host + /api/auth
 */
 
 const { Router } = require('express');
 const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
-const { loginUser, renewToken, newToken } = require('../controllers/auth');
+const { loginPlayer, renewToken, newToken } = require('../controllers/auth');
 const { validateJWT } = require('../middlewares/validateJWT');
 
 const router = Router();
@@ -19,7 +19,7 @@ router.post(
 		check('password', 'El password debe ser de 6 caracteres').isLength({ min: 6 }),
 		validateFields
 	],
-	loginUser
+	loginPlayer
 );
 
 router.get('/renew', validateJWT, renewToken);

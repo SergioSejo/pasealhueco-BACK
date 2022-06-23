@@ -1,28 +1,28 @@
 const bcrypt = require('bcryptjs');
-const User = require('../models/user');
+const Player = require('../models/player');
 const { generateJWT } = require('../helpers/jwt');
 const { response } = require('../helpers/response');
 const { enumGeneral } = require('../helpers/enumResponse');
 
-const loginUser = async (req, res) => {
+const loginPlayer = async (req, res) => {
 	let body;
 	try {
 		const { email, password } = req.body;
-		let user = await User.findOne({ email });
-		if (!user) {
+		let player = await Player.findOne({ email });
+		if (!player) {
 			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 
-		const validPassword = bcrypt.compareSync(password, user.password);
+		const validPassword = bcrypt.compareSync(password, player.password);
 		if (!validPassword) {
 			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
 		}
 
-		const token = await generateJWT(user.id, user.name);
+		const token = await generateJWT(player.id, player.name);
 
-		body = { ok: true, uid: user.id, name: user.name, token };
+		body = { ok: true, uid: player.id, name: player.name, token };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -49,7 +49,7 @@ const newToken = async (req, res) => {
 };
 
 module.exports = {
-	loginUser,
+	loginPlayer,
 	renewToken,
 	newToken
 };

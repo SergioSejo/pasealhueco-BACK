@@ -1,5 +1,5 @@
 /*
-    User rutes / team
+    Team rutes / team
     host + /api/team
 */
 
