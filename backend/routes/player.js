@@ -14,7 +14,8 @@ const {
 	player_getAll,
 	player_getById,
 	player_getByEmail,
-	player_getByTeam
+	player_getByTeam,
+	prueba
 } = require('../controllers/player');
 
 const router = Router();
@@ -57,5 +58,7 @@ router.get('/getAll', validateJWT, player_getAll);
 router.get('/getById', validateJWT, player_getById);
 router.get('/getByEmail', validateJWT, player_getByEmail);
 router.get('/getByTeam', validateJWT, player_getByTeam);
+
+router.get('/prueba', prueba);
 
 module.exports = router;

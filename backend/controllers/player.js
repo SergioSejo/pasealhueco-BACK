@@ -165,6 +165,25 @@ const player_getByTeam = async (req, res) => {
 	}
 };
 
+const prueba = async (req, res) => {
+	let body;
+	try {
+		console.log(req.body);
+
+		const fechaca = new Date();
+		let partido = new Date('March 13, 2022 03:24:00');
+
+		console.log('fechaca: ', fechaca);
+		console.log('partido: ', partido);
+
+		body = { ok: true, msg: 'prueba' };
+		return response(res, 201, body);
+	} catch (error) {
+		console.log(error);
+		return response(res, 500);
+	}
+};
+
 module.exports = {
 	player_create,
 	player_update,
@@ -172,5 +191,6 @@ module.exports = {
 	player_getAll,
 	player_getById,
 	player_getByEmail,
-	player_getByTeam
+	player_getByTeam,
+	prueba
 };

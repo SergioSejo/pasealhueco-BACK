@@ -12,6 +12,7 @@ const {
 	jornada_update,
 	jornada_delete,
 	jornada_getAll,
+	jornada_getByYear,
 	jornada_getById
 } = require('../controllers/jornada');
 
@@ -23,8 +24,7 @@ router.post(
 		//middelwares
 		check('team_1', 'El equipo 1 es obligatorio').not().isEmpty(),
 		check('team_2', 'El equipo 2 es obligatorio').not().isEmpty(),
-		check('matchDay', 'matchDay es obligatorio').not().isEmpty(),
-		check('matchHour', 'matchHour es obligatorio').not().isEmpty(),
+		check('matchDate', 'matchDate es obligatorio').not().isEmpty(),
 		check('place', 'place es obligatorio').not().isEmpty(),
 		validateFields,
 		validateJWT
@@ -55,6 +55,7 @@ router.post(
 );
 
 router.get('/getAll', validateJWT, jornada_getAll);
+router.get('/getByYear', jornada_getByYear);
 router.get('/getById', validateJWT, jornada_getById);
 
 module.exports = router;

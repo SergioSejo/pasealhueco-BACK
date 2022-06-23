@@ -67,11 +67,7 @@ const jornadaSchema = Schema({
 			}
 		]
 	},
-	matchDay: {
-		type: String,
-		require: true
-	},
-	matchHour: {
+	matchDate: {
 		type: String,
 		require: true
 	},
