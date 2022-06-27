@@ -67,6 +67,14 @@ const jornadaSchema = Schema({
 			}
 		]
 	},
+	number: {
+		type: Number,
+		require: true
+	},
+	year: {
+		type: Number,
+		require: true
+	},
 	matchDate: {
 		type: String,
 		require: true

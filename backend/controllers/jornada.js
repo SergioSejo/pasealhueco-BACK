@@ -7,8 +7,6 @@ const jornada_create = async (req, res) => {
 	try {
 		let jornada = new Jornada(req.body);
 
-		jornada.matchDate = new Date(`December 07, 2021 16:00:00`).getTime().toString();
-
 		const newJornada = await jornada.save();
 
 		body = { ok: true, msg: enumJornada.jornadaCreated, newJornada };
@@ -66,7 +64,7 @@ const jornada_getAll = async (req, res) => {
 	try {
 		let jornadas = await Jornada.find();
 		if (!jornadas) {
-			body = { ok: true, msg: enumJornada.jornadaEmpty };
+			body = { ok: false, msg: enumJornada.jornadaEmpty };
 			return response(res, 200, body);
 		}
 
@@ -82,28 +80,17 @@ const jornada_getByYear = async (req, res) => {
 	let body;
 	try {
 		const { year } = req.query;
-		//AQUIIII
-		console.log('req: ', req);
 		if (!year) {
 			body = { ok: false, msg: enumGeneral.emptyData };
 			return response(res, 400, body);
 		}
-		let dateIni = new Date(`September 1, ${year} 03:24:00`).getTime().toString();
-		let dateFin = new Date(`May 31, ${year + 1} 03:24:00`).getTime().toString();
-		console.log('dateIni: ', dateIni);
-		console.log('dateFin: ', dateFin);
-		let jornadas = await Jornada.find({
-			matchDate: {
-				$gte: dateIni,
-				$lt: dateFin
-			}
-		});
+		let jornadas = await Jornada.find({ year }).sort('matchDate');
 		if (!jornadas) {
-			body = { ok: true, msg: enumJornada.jornadaEmpty };
+			body = { ok: false, msg: enumJornada.jornadaEmpty };
 			return response(res, 200, body);
 		}
 
-		body = { ok: true, jornadas };
+		body = jornadas;
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);
@@ -121,7 +108,7 @@ const jornada_getById = async (req, res) => {
 		}
 		let jornada = await Jornada.findById(id);
 		if (!jornada) {
-			body = { ok: true, msg: enumJornada.jornadaNoExist };
+			body = { ok: false, msg: enumJornada.jornadaNoExist };
 			return response(res, 200, body);
 		}
 
