@@ -1,0 +1,65 @@
+[
+	{
+		"team_1": {
+			"team": "62b4558279141dcf4ef18a92",
+			"score": 1,
+			"scorers": [],
+			"assists": []
+		},
+		"team_2": {
+			"team": "62b454e479141dcf4ef18a8e",
+			"score": 4,
+			"scorers": [
+				{
+					"id_player": "62b4558c79141dcf4ef18a95",
+					"goals": 4,
+					"_id": "62b9bdd27e5d44fdb4eed575"
+				}
+			],
+			"assists": []
+		},
+		"number": 1,
+		"year": 2021,
+		"matchDate": "1638889200000",
+		"place": "Campo 1 Moratalaz",
+		"__v": 0
+	},
+	{
+		"team_1": {
+			"team": {
+				"_id": "62b454e479141dcf4ef18a8e",
+				"name": "Sad Eyes",
+				"description": "El mejor equipo del mundo",
+				"creationDate": "123456",
+				"__v": 0
+			},
+			"score": 5,
+			"scorers": [
+				{
+					"id_player": "62b4558c79141dcf4ef18a95",
+					"goals": 5,
+					"_id": "62b9c18f04b38942cd4f62cc"
+				}
+			],
+			"assists": []
+		},
+		"team_2": {
+			"team": {
+				"_id": "62b4558279141dcf4ef18a92",
+				"name": "Q3",
+				"description": "Los cutreees",
+				"creationDate": "123456",
+				"__v": 0
+			},
+			"score": 0,
+			"scorers": [],
+			"assists": []
+		},
+		"_id": "62b9c18f04b38942cd4f62cb",
+		"number": 1,
+		"year": 2021,
+		"matchDate": "1644942600000",
+		"place": "Campo 2 Moratalaz",
+		"__v": 0
+	}
+]
