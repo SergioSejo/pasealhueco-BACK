@@ -2,8 +2,9 @@ const { Schema, model } = require('mongoose');
 
 const jornadaSchema = Schema({
 	team_1: {
-		id: {
-			type: String,
+		team: {
+			type: Schema.Types.ObjectId,
+			ref: 'Team',
 			require: true
 		},
 		score: {
@@ -35,8 +36,9 @@ const jornadaSchema = Schema({
 		]
 	},
 	team_2: {
-		id: {
-			type: String,
+		team: {
+			type: Schema.Types.ObjectId,
+			ref: 'Team',
 			require: true
 		},
 		score: {

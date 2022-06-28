@@ -84,7 +84,7 @@ const jornada_getByYear = async (req, res) => {
 			body = { ok: false, msg: enumGeneral.emptyData };
 			return response(res, 400, body);
 		}
-		let jornadas = await Jornada.find({ year }).sort('matchDate');
+		let jornadas = await Jornada.find({ year }).sort('matchDate').populate('team_1.team').populate('team_2.team');
 		if (!jornadas) {
 			body = { ok: false, msg: enumJornada.jornadaEmpty };
 			return response(res, 200, body);
