@@ -23,7 +23,8 @@ app.use(express.json());
 app.use('/api/auth', require('./routes/auth'));
 app.use('/api/player', require('./routes/player'));
 app.use('/api/team', require('./routes/team'));
-app.use('/api/jornada', require('./routes/jornada'));
+app.use('/api/match', require('./routes/match'));
+app.use('/api/mock', require('./_test/mocks/inserts'));
 
 //listen requests
 app.listen(process.env.PORT, () => {

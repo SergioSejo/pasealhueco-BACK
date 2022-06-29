@@ -1,0 +1,47 @@
+[
+	{
+		"name": "Sergio Jiménez Yébenes",
+		"email": "sergio.sejo@gmail.com",
+		"password": "123456",
+		"age": "30",
+		"foot": "Derecho",
+		"number": 8,
+		"team": "62b4558279141dcf4ef18a92"
+	},
+	{
+		"name": "Adrián Díaz Jiménez",
+		"email": "adri@gmail.com",
+		"password": "123456",
+		"age": "29",
+		"foot": "Derecho",
+		"number": 9,
+		"team": "62b4558279141dcf4ef18a92"
+	},
+	{
+		"name": "Javier Palomo Benito",
+		"email": "palomo@gmail.com",
+		"password": "123456",
+		"age": "28",
+		"foot": "Derecho",
+		"number": 10,
+		"team": "62b4558279141dcf4ef18a92"
+	},
+	{
+		"name": "Enrique Sánchez García",
+		"email": "sanchez@gmail.com",
+		"password": "123456",
+		"age": "30",
+		"foot": "Derecho",
+		"number": 7,
+		"team": "62b4558279141dcf4ef18a92"
+	},
+	{
+		"name": "Raúl Zamorano Valverde",
+		"email": "raulitoeh@gmail.com",
+		"password": "123456",
+		"age": "27",
+		"foot": "Derecho",
+		"number": 11,
+		"team": "62b4558279141dcf4ef18a92"
+	}
+]

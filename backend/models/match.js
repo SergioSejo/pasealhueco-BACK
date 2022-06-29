@@ -1,6 +1,6 @@
 const { Schema, model } = require('mongoose');
 
-const jornadaSchema = Schema({
+const matchSchema = Schema({
 	team_1: {
 		team: {
 			type: Schema.Types.ObjectId,
@@ -69,7 +69,7 @@ const jornadaSchema = Schema({
 			}
 		]
 	},
-	number: {
+	journey: {
 		type: Number,
 		require: true
 	},
@@ -77,7 +77,7 @@ const jornadaSchema = Schema({
 		type: Number,
 		require: true
 	},
-	matchDate: {
+	date: {
 		type: String,
 		require: true
 	},
@@ -87,4 +87,4 @@ const jornadaSchema = Schema({
 	}
 });
 
-module.exports = model('Jornada', jornadaSchema);
+module.exports = model('Match', matchSchema);

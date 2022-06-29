@@ -1,6 +1,6 @@
 /*
-    Jornada rutes / jornada
-    host + /api/jornada
+    Match rutes / match
+    host + /api/match
 */
 
 const { Router } = require('express');
@@ -8,13 +8,13 @@ const { check } = require('express-validator');
 const { validateFields } = require('../middlewares/validateFields');
 const { validateJWT } = require('../middlewares/validateJWT');
 const {
-	jornada_create,
-	jornada_update,
-	jornada_delete,
-	jornada_getAll,
-	jornada_getByYear,
-	jornada_getById
-} = require('../controllers/jornada');
+	match_create,
+	match_update,
+	match_delete,
+	match_getAll,
+	match_getByYear,
+	match_getById
+} = require('../controllers/match');
 
 const router = Router();
 
@@ -29,7 +29,7 @@ router.post(
 		validateFields,
 		validateJWT
 	],
-	jornada_create
+	match_create
 );
 
 router.post(
@@ -40,7 +40,7 @@ router.post(
 		validateFields,
 		validateJWT
 	],
-	jornada_update
+	match_update
 );
 
 router.post(
@@ -51,11 +51,11 @@ router.post(
 		validateFields,
 		validateJWT
 	],
-	jornada_delete
+	match_delete
 );
 
-router.get('/getAll', validateJWT, jornada_getAll);
-router.get('/getByYear', jornada_getByYear);
-router.get('/getById', validateJWT, jornada_getById);
+router.get('/getAll', validateJWT, match_getAll);
+router.get('/getByYear', match_getByYear);
+router.get('/getById', validateJWT, match_getById);
 
 module.exports = router;

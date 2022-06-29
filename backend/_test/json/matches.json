@@ -1,0 +1,107 @@
+[
+	{
+		"team_1": {
+			"team": "",
+			"score": 4,
+			"scorers": [
+				{
+					"id_player": "",
+					"goals": 4
+				}
+			],
+			"assists": []
+		},
+		"team_2": {
+			"team": "",
+			"score": 1,
+			"scorers": [
+				{
+					"id_player": "",
+					"goals": 1
+				}
+			],
+			"assists": []
+		},
+		"journey": 1,
+		"year": 2021,
+		"date": "1638889200000",
+		"place": "Campo 1 Moratalaz",
+		"__v": 0
+	},
+	{
+		"team_1": {
+			"team": "",
+			"score": 0,
+			"scorers": [],
+			"assists": []
+		},
+		"team_2": {
+			"team": "",
+			"score": 0,
+			"scorers": [],
+			"assists": []
+		},
+		"journey": 1,
+		"year": 2021,
+		"date": "1644942600000",
+		"place": "La Elipa 2",
+		"__v": 0
+	},
+	{
+		"team_1": {
+			"team": "",
+			"score": 1,
+			"scorers": [
+				{
+					"id_player": "",
+					"goals": 1
+				}
+			],
+			"assists": []
+		},
+		"team_2": {
+			"team": "",
+			"score": 1,
+			"scorers": [
+				{
+					"id_player": "",
+					"goals": 1
+				}
+			],
+			"assists": []
+		},
+		"journey": 2,
+		"year": 2021,
+		"date": "1638889200000",
+		"place": "La Elipa 1",
+		"__v": 0
+	},
+	{
+		"team_1": {
+			"team": "",
+			"score": 0,
+			"scorers": [],
+			"assists": []
+		},
+		"team_2": {
+			"team": "",
+			"score": 3,
+			"scorers": [
+				{
+					"id_player": "",
+					"goals": 2
+				},
+				{
+					"id_player": "",
+					"goals": 1
+				}
+			],
+			"assists": []
+		},
+		"journey": 2,
+		"year": 2021,
+		"date": "1644942600000",
+		"place": "Campo 2 Moratalaz",
+		"__v": 0
+	}
+]

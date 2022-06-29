@@ -20,13 +20,13 @@ const enumTeam = {
 	teamEmpty: 'No hay equipos en la base de datos'
 };
 
-const enumJornada = {
-	jornadaCreated: 'Jornada creada satisfactoriamente',
-	jornadaExist: 'Ya existe una jornada con ese nombre',
-	jornadaNoExist: 'Jornada no encontrada',
-	jornadaDeleted: 'Jornada eliminada de la base de datos',
-	jornadaUpdated: 'Jornada modificada correctamente',
-	jornadaEmpty: 'No hay jornadas en la base de datos'
+const enumMatch = {
+	matchCreated: 'Match creada satisfactoriamente',
+	matchExist: 'Ya existe una match con ese nombre',
+	matchNoExist: 'Match no encontrada',
+	matchDeleted: 'Match eliminada de la base de datos',
+	matchUpdated: 'Match modificada correctamente',
+	matchEmpty: 'No hay matchs en la base de datos'
 };
 
 const enumToken = {
@@ -39,5 +39,5 @@ module.exports = {
 	enumPlayer,
 	enumTeam,
 	enumToken,
-	enumJornada
+	enumMatch
 };
