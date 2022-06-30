@@ -6,14 +6,12 @@
 const { Router } = require('express');
 
 const { response } = require('../../helpers/response');
-const { enumMatch } = require('../../helpers/enumResponse');
 const Team = require('../../models/team');
 const Player = require('../../models/player');
 const Match = require('../../models/match');
 const teamsObj = require('../json/teams.json');
 const playersObj = require('../json/player.json');
 const matchesObj = require('../json/matches.json');
-const team = require('../../models/team');
 
 const router = Router();
 
@@ -38,26 +36,20 @@ const insert_mock = async (req, res) => {
 
 		//Insert Macthes
 		//Poner los id de team
-		let indexMatches = -1;
-		let indexMatchesAux = -1;
-		let indexMatchesVar = -1;
-		let matchesBBDD = matchesObj.map(function (match) {
-			indexMatchesAux++;
-			if (indexMatchesAux > 3) {
-				indexMatches--;
-			} else {
-				indexMatches = indexMatchesAux;
-			}
-			return { ...match, team: resultTeams[indexMatches]._id };
-		});
+		let matchesBBDD = matchesObj;
+		matchesBBDD[0].team_1.team = resultTeams[0]._id;
+		matchesBBDD[0].team_2.team = resultTeams[1]._id;
+
+		matchesBBDD[1].team_1.team = resultTeams[2]._id;
+		matchesBBDD[1].team_2.team = resultTeams[3]._id;
+
+		matchesBBDD[2].team_1.team = resultTeams[3]._id;
+		matchesBBDD[2].team_2.team = resultTeams[2]._id;
+
+		matchesBBDD[3].team_1.team = resultTeams[1]._id;
+		matchesBBDD[3].team_2.team = resultTeams[0]._id;
 		//Poner los id de player
-		console.log('matchesBBDD[0].team_1.scorers[0].id_player: ', matchesBBDD[0].team_1.scorers[0].id_player);
-		console.log('resultPlayers[0]._id: ', resultPlayers[0]._id);
 		matchesBBDD[0].team_1.scorers[0].id_player = resultPlayers[0]._id;
-		console.log(
-			'DESPUUUUUEEEEEEES matchesBBDD[0].team_1.scorers[0].id_player: ',
-			matchesBBDD[0].team_1.scorers[0].id_player
-		);
 		matchesBBDD[0].team_2.scorers[0].id_player = resultPlayers[2]._id;
 
 		matchesBBDD[2].team_1.scorers[0].id_player = resultPlayers[4]._id;
@@ -79,9 +71,9 @@ const insert_mock = async (req, res) => {
 const delete_mock = async (req, res) => {
 	let body;
 	try {
-		let resultTeams = await Team.remove({});
-		let resultPlayers = await Player.remove({});
-		let resultMatches = await Match.remove({});
+		let resultTeams = await Team.deleteMany({});
+		let resultPlayers = await Player.deleteMany({});
+		let resultMatches = await Match.deleteMany({});
 
 		body = { ok: true };
 		return response(res, 201, body);

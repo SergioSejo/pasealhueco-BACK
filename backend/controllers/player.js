@@ -171,12 +171,14 @@ const prueba = async (req, res) => {
 		console.log(req.body);
 
 		const fechaca = new Date();
-		let partido = new Date('March 13, 2022 03:24:00');
+		let partido = new Date('December 07, 2021 17:30:00').getTime().toString();
+
+		let partido2 = new Date('February 15, 2022 16:00:00').getTime().toString();
 
 		console.log('fechaca: ', fechaca);
 		console.log('partido: ', partido);
 
-		body = { ok: true, msg: 'prueba' };
+		body = { ok: true, partido, partido2 };
 		return response(res, 201, body);
 	} catch (error) {
 		console.log(error);

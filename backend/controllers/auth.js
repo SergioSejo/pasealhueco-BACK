@@ -14,11 +14,11 @@ const loginPlayer = async (req, res) => {
 			return response(res, 400, body);
 		}
 
-		const validPassword = bcrypt.compareSync(password, player.password);
+		/*const validPassword = bcrypt.compareSync(password, player.password);
 		if (!validPassword) {
 			body = { ok: false, msg: enumGeneral.incorrectData };
 			return response(res, 400, body);
-		}
+		}*/
 
 		const token = await generateJWT(player.id, player.name);
 
